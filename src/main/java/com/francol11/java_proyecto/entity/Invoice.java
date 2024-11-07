@@ -1,5 +1,6 @@
 package com.francol11.java_proyecto.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Id de la factura", example = "1", requiredMode = Schema.RequiredMode.AUTO)
     private Long id;
 
     @Column(name = "client_id")
@@ -28,9 +30,11 @@ public class Invoice {
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
+    @Schema(description = "Fecha de creación de la factura", example = "2023-01-01T00:00:00", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime createdAt;
 
     @Column(name = "total", nullable = false)
+    @Schema(description = "Total de la factura", example = "100.00", requiredMode = Schema.RequiredMode.REQUIRED)
     private Double total;
 
 }

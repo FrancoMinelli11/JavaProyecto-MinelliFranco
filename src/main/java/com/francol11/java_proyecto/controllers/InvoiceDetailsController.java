@@ -1,6 +1,5 @@
 package com.francol11.java_proyecto.controllers;
 
-import com.francol11.java_proyecto.dto.ErrorResponseDto;
 import com.francol11.java_proyecto.entity.InvoiceDetails;
 import com.francol11.java_proyecto.services.InvoiceDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +27,8 @@ public class InvoiceDetailsController {
     @Operation(summary = "Get all InvoiceDetails", tags = {"Invoice-Details"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok"),
-            @ApiResponse(responseCode = "400", description = "Bad Request")
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Iterable<InvoiceDetails>> getAll() {
@@ -38,7 +38,8 @@ public class InvoiceDetailsController {
     @Operation(summary = "Get InvoiceDetail by id", tags = {"Invoice-Details"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok"),
-            @ApiResponse(responseCode = "400", description = "Bad request")
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Optional<InvoiceDetails>> getById(@PathVariable Long invoiceDetailId) {
@@ -56,7 +57,8 @@ public class InvoiceDetailsController {
          @ApiResponse(responseCode = "200", description = "Ok"),
          @ApiResponse(responseCode = "400", description = "Bad Request",
          content = {@Content(mediaType = "application/json", schema = @Schema(implementation = InvoiceDetails.class))}
-         )
+         ),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<InvoiceDetails> create(@RequestBody InvoiceDetails invoiceDts) {

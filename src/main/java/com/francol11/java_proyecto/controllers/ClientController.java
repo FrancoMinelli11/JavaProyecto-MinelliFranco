@@ -1,6 +1,5 @@
 package com.francol11.java_proyecto.controllers;
 
-import com.francol11.java_proyecto.dto.ErrorResponseDto;
 import com.francol11.java_proyecto.entity.Client;
 import com.francol11.java_proyecto.services.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
