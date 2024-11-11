@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Client")
 @Getter @Setter @NoArgsConstructor
@@ -34,4 +36,7 @@ public class Client {
     @Schema(description = "DNI del cliente", example = "12345678", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer dni;
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Schema(description = "Lista de facturas", example = "[1,2,3]", requiredMode = Schema.RequiredMode.REQUIRED)
+    private List<Invoice> invoices;
 }

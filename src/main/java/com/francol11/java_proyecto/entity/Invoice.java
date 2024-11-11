@@ -8,14 +8,15 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Invoice")
 @Getter @Setter @NoArgsConstructor
 public class Invoice {
 
-    public Invoice(Long clientId, LocalDateTime createdAt, Double total) {
-        this.clientId = clientId;
+    public Invoice(Client client, LocalDateTime createdAt, Double total) {
+        this.client = client;
         this.createdAt = createdAt;
         this.total = total;
     }
@@ -25,8 +26,11 @@ public class Invoice {
     @Schema(description = "Id de la factura", example = "1", requiredMode = Schema.RequiredMode.AUTO)
     private Long id;
 
-    @Column(name = "client_id")
-    private Long clientId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
+    @Schema(description = "Id del cliente", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    private Client client;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -36,5 +40,9 @@ public class Invoice {
     @Column(name = "total", nullable = false)
     @Schema(description = "Total de la factura", example = "100.00", requiredMode = Schema.RequiredMode.REQUIRED)
     private Double total;
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Schema(description = "Lista de facturas detalladas", example = "[1,2,3]", requiredMode = Schema.RequiredMode.REQUIRED)
+    private List<InvoiceDetails> invoiceDetails;
 
 }

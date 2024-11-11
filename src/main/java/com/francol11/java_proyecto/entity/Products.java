@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Products")
 @Getter @Setter @NoArgsConstructor
@@ -38,6 +40,5 @@ public class Products {
     @Column(name = "price", nullable = false)
     @Schema(description = "Precio", example = "10.00", requiredMode = Schema.RequiredMode.REQUIRED)
     private Double price;
-
 
 }
